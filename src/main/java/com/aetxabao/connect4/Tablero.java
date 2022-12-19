@@ -1,7 +1,9 @@
 package com.aetxabao.connect4;
 
+import java.util.Random;
+
 /**
- * @author Nombre Apellido
+ * @author Rubén Gurrea
  */
 public class Tablero {
 
@@ -30,11 +32,10 @@ public class Tablero {
     }
 
     public Tablero(char[][] m) {
-        //TODO: Tablero(m)
-        contador = 0;
+        contador = 27;
         turno = X;
-        ancho = 0;
-        alto = 0;
+        ancho = W;
+        alto = H;
         this.m = m;
     }
 
@@ -59,15 +60,28 @@ public class Tablero {
     }
 
     public void iniciaTurno() {
-        //TODO: iniciaTurno
+        char[] chars = {X, O};
+        Random rnd = new Random();
+        int next = rnd.nextInt(2);
+        turno = chars[next];
+        System.out.printf("Comienza el jugador: %s", chars[next]);
     }
 
     public void cambiaTurno() {
-        //TODO: cambiaTurno
+        if (turno == X){
+            turno = O;
+        }else {
+            turno = X;
+        }
     }
 
     public boolean estaColumnaLibre(int columna) {
-        //TODO: estaColumnaLibre
+        if (m[columna] == null && columna > (W-1)){
+            return true;
+        }
+        if (m[columna][5] == L){
+            return true;
+        }
         return false;
     }
 
