@@ -82,15 +82,18 @@ public class Tablero {
         if (m[columna][5] == L){
             return true;
         }
-        return false;
+       return false;
     }
 
     public void inserta(char ficha, int columna) {
         //TODO: insertar
         if (estaColumnaLibre(columna)){
             for (int j = 0; j < H; j++) {
-                m[columna][j]+=ficha;
-                contador++;
+                if (m[columna][j]== L) {
+                    m[columna][j]=ficha;
+                    contador++;
+                    return;
+                }
             }
         }else{
             System.out.println("Esta columna no tiene huecos libres");
@@ -112,28 +115,29 @@ public class Tablero {
 
     private boolean ganaHorizontal(char jugador) {
         //TODO: ganaHorizontal
-       // if (hay4Horizontales(jugador,)){
-       //     return true;
-       //     System.out.println("¡Ha ganado el jugador "+jugador+"!");
-       // }
-        return false;
-    }
-
-    //PREGUNTA: HAY QUE PONER EN LAS FILAS Y COLUMNAS LO DE -1?
-    private boolean hay4Horizontales(int columna, int fila, char jugador){
-        if (columna <= 4) {
-            for (int i = 0; i < (columna+4); i++) {
-                m[i][fila]=jugador;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < H; j++) {
+                hay4Horizontales(i,j,jugador);
             }
-            return true;
         }
         return false;
     }
 
+    private boolean hay4Horizontales(int columna, int fila, char jugador){
+            for (int i = 0; i < (columna+4); i++) {
+                m[i][fila]=jugador;
+            }
+            return true;
+    }
+
     private boolean ganaVertical(char jugador) {
         //TODO: ganaVertical
-        boolean b = false;
-        return b;
+        for (int i = 0; i < W; i++) {
+            for (int j = 0; j < 3; j++) {
+                hay4Verticales(i,j,jugador);
+            }
+        }
+        return false;
     }
 
     private boolean hay4Verticales(int columna, int fila, char jugador){
@@ -148,8 +152,12 @@ public class Tablero {
 
     private boolean ganaDiagonalArriba(char jugador) {
         //TODO: ganaDiagonalArriba
-        boolean b = false;
-        return b;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 3; j++) {
+                hay4DiagonalesArriba(i,j,jugador);
+            }
+        }
+        return false;
     }
 
     private boolean hay4DiagonalesArriba(int columna, int fila, char jugador){
@@ -166,8 +174,12 @@ public class Tablero {
 
     private boolean ganaDiagonalAbajo(char jugador) {
         //TODO: ganaDiagonalAbajo
-        boolean b = false;
-        return b;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 4; j < H; j++) {
+                hay4DiagonalesAbajo(i,j,jugador);
+            }
+        }
+        return false;
     }
 
     private boolean hay4DiagonalesAbajo(int columna, int fila, char jugador){
