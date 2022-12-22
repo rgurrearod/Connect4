@@ -181,7 +181,7 @@ public class Tablero {
 
 
     public boolean estaFinalizado() {
-        if (gana(turno)||estaLleno()){
+        if (gana(X)|| gana(O) ||estaLleno()){
             return true;
         }
         return false;
