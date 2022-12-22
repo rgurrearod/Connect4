@@ -34,8 +34,15 @@ public class Tablero {
     public Tablero(char[][] m) {
         contador = 0;
         turno = X;
-        ancho = W;
-        alto = H;
+        ancho = m.length;
+        alto = m[0].length;
+        for (int i = 0; i < ancho; i++) {
+            for (int j = 0; j < alto; j++) {
+                if (m[i][j] != L){
+                    contador++;
+                }
+            }
+        }
         this.m = m;
     }
 
@@ -116,38 +123,46 @@ public class Tablero {
     private boolean ganaHorizontal(char jugador) {
         //TODO: ganaHorizontal
         for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < H; j++) {
-                hay4Horizontales(i,j,jugador);
+            for (int j = 0; j < alto; j++) {
+                if (hay4Horizontales(i,j,jugador)) {
+                    return true;
+                }
             }
         }
         return false;
     }
 
     private boolean hay4Horizontales(int columna, int fila, char jugador){
-            for (int i = 0; i < (columna+4); i++) {
-                m[i][fila]=jugador;
-            }
-            return true;
+//        for (int i = 0; i < 4; i++) {
+//                if (m[columna+i][fila]!=jugador) {
+//                    return false;
+//                }
+//        }
+//        return true;
+        return m[columna][fila]==jugador && m[columna+1][fila]==jugador  && m[columna+2][fila]==jugador  && m[columna+3][fila]==jugador;
     }
 
     private boolean ganaVertical(char jugador) {
         //TODO: ganaVertical
-        for (int i = 0; i < W; i++) {
+        for (int i = 0; i < ancho; i++) {
             for (int j = 0; j < 3; j++) {
-                hay4Verticales(i,j,jugador);
+                if (hay4Verticales(i,j,jugador)) {
+                    return true;
+                }
             }
         }
         return false;
     }
 
     private boolean hay4Verticales(int columna, int fila, char jugador){
-        if (fila <=3){
-            for (int j = 0; j < (fila+4); j++) {
-                m[columna][j]=jugador;
-            }
-            return true;
-        }
-        return false;
+//        if (fila <=3){
+//            for (int j = 0; j < (fila+4); j++) {
+//                m[columna][j]=jugador;
+//            }
+//            return true;
+//        }
+//        return false;
+        return m[columna][fila]==jugador && m[columna][fila+1]==jugador  && m[columna][fila+2]==jugador  && m[columna][fila+3]==jugador;
     }
 
     private boolean ganaDiagonalArriba(char jugador) {
